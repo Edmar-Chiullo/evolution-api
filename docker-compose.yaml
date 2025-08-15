@@ -1,0 +1,20 @@
+services:
+  evolution-api:
+      container_name: evolution_api
+      image: evoapicloud/evolution-api:v2.2.3
+      restart: always
+      depends_on:
+        - redis
+        - postgres
+      ports:
+        - 8080:8080
+      volumes:
+        - evolution_instances:/evolution/instances
+      networks:
+        - evolution-net
+      env_file:
+        - .env
+      expose:
+        - 8080
+volumes:
+    evolution_instances:
